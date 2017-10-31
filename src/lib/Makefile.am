@@ -1,3 +1,5 @@
-noinst_LTLIBRARIES = libacnnet.la
+#noinst_LTLIBRARIES = libacnnet.la
 
-libacnnet_la_sources = svmread.c 
+#libacnnet_la_sources = svmread.c
+
+LIBOBJS = @LIBOBJS@
