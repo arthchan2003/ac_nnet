@@ -1,2 +1,2 @@
 # ac_nnet
-My own implementation of Neural Network Routines
+My own implementation of Neural Network Routines.
