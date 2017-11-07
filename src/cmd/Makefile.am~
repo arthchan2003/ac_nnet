@@ -1,0 +1,12 @@
+bin_PROGRAMS = ac_linreg
+
+ac_linreg_SOURCES = ac_linreg.c
+
+#noinst_HEADERS = cmd_ln_defn.h sphinx_wave2feat.h
+
+sphinx_fe_LDADD = \
+	$(top_builddir)/src/libsphinxbase/libsphinxbase.la
+
+AM_CFLAGS =-I$(top_srcdir)/include \
+	-I$(top_builddir)/include \
+	-I$(top_srcdir)/src/libsphinxbase/fe
