@@ -3,6 +3,26 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#define Malloc(type,n) (type *)malloc((n)*sizeof(type))
+
+static char *line = NULL;
+static int max_line_len;
+struct svm_problem prob;		// set by read_problem
+struct svm_node *x_space;
+
+struct svm_node
+{
+	int index;
+	double value;
+};
+
+struct svm_problem
+{
+	int l;
+	double *y;
+	struct svm_node **x;
+};
+
 
 static char* readline(FILE *input)
 {
@@ -21,6 +41,13 @@ static char* readline(FILE *input)
 	}
 	return line;
 }
+
+void exit_input_error(int line_num)
+{
+	fprintf(stderr,"Wrong input format at line %d\n", line_num);
+	exit(1);
+}
+
 
 void read_problem(const char *filename)
 {
@@ -105,7 +132,7 @@ void read_problem(const char *filename)
 		x_space[j++].index = -1;
 	}
 
-	if(param.gamma == 0 && max_index > 0)
+/*	if(param.gamma == 0 && max_index > 0)
 		param.gamma = 1.0/max_index;
 
 	if(param.kernel_type == PRECOMPUTED)
@@ -121,7 +148,7 @@ void read_problem(const char *filename)
 				fprintf(stderr,"Wrong input format: sample_serial_number out of range\n");
 				exit(1);
 			}
-		}
+            }*/
 
 	fclose(fp);
 }
