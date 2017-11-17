@@ -7,7 +7,25 @@ matrix_t *matrix_init(int32 nrow, int32 ncol)
 {
     matrix_t *m= NULL;
     m = ckd_calloc_2d(nrow, ncol, sizeof(float32));
+    
     return m;
+}
+
+//range is the [0, range]
+matrix_t *matrix_random_init(int32 nrow, int32 ncol, float32 range)
+{
+    matrix_t *m = NULL;
+    m = matrix_init(nrow, ncol);
+
+    int32 i,j;
+    
+    for (i= 0; i< m->nrow ; i++){
+
+        for (j=0 ; j <m->ncol ; j++){
+            float32 x=(float32)rand()/((float32)RAND_MAX/range);
+            m->mat[i][j] = x ; 
+        }
+    }
 
 }
 

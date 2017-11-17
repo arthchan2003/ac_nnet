@@ -1,6 +1,7 @@
-bin_PROGRAMS = ac_linreg
+bin_PROGRAMS = ac_linreg matrix_tester
 
-ac_linreg_SOURCES = ac_linreg.c
+ac_linreg_SOURCES = ac_linreg.c 
+matrix_tester_SOURCES = matrix_tester.c
 
 #noinst_HEADERS = cmd_ln_defn.h sphinx_wave2feat.h
 
