@@ -15,6 +15,10 @@ int main(int argc, char *argv[])
 {
     cmd_ln_t * config;
     config = cmd_ln_parse_r(NULL, defn, argc, argv, TRUE);
+
+    matrix_t* zero;
+//    zero = matrix_init(2,2);
+    
     
     cmd_ln_free_r(config); config= NULL;
 }

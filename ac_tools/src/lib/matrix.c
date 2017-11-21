@@ -6,9 +6,23 @@
 matrix_t *matrix_init(int32 nrow, int32 ncol)
 {
     matrix_t *m= NULL;
-    m = ckd_calloc_2d(nrow, ncol, sizeof(float32));
+    m->mat = ckd_calloc_2d(nrow, ncol, sizeof(float32));
+    m->nrow = nrow;
+    m->ncol = ncol;
     
     return m;
+}
+
+void matrix_display(matrix_t *m)
+{
+    int i,j;
+    for (i= 0 ; i< m->nrow; i++){
+        for (j= 0 ; j < m->ncol; j++){
+            printf ("%f ", m->mat[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
 
 //range is the [0, range]
@@ -94,5 +108,7 @@ void multiply (matrix_t *out_c, matrix_t *a, matrix_t *b)
 
 void matrix_free(matrix_t *m)
 {
+    ckd_free_2d (m->mat);
+    m->mat = NULL;
     ckd_free(m);
 }
