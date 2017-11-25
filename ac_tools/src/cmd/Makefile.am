@@ -6,10 +6,10 @@ matrix_tester_SOURCES     = matrix_tester.c
 
 #noinst_HEADERS = cmd_ln_defn.h sphinx_wave2feat.h
 
-ac_linreg_LDADD = $(top_builddir)/src/lib/libacnnet.la -lsphinxbase -lsphinxad -lm
+ac_linreg_LDADD =  -lsphinxbase -lsphinxad -lm
 
 AM_CFLAGS =-I$(top_srcdir)/include \
 	-I$(top_builddir)/include 
 
-LDADD = -lsphinxbase -lsphinxad -lm
+LDADD = $(top_builddir)/src/lib/libacnnet.la -lsphinxbase -lsphinxad -lm
 
