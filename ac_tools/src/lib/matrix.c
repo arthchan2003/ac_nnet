@@ -1,4 +1,5 @@
 #include "matrix.h"
+#include <stdio.h>
 #include <assert.h>
 #include "sphinxbase/prim_type.h"
 #include "sphinxbase/ckd_alloc.h"
@@ -6,11 +7,26 @@
 matrix_t *matrix_init(int32 nrow, int32 ncol)
 {
     matrix_t *m= NULL;
+    m=ckd_calloc(1, sizeof(matrix_t));
     m->mat = ckd_calloc_2d(nrow, ncol, sizeof(float32));
     m->nrow = nrow;
     m->ncol = ncol;
     
     return m;
+}
+
+matrix_t *matrix_init_with_array (int32 nrow, int32 ncol, float32 array[])
+{
+    matrix_t *m = matrix_init(nrow, ncol);
+
+    int32 l=0;
+    int i,j;
+    for (i=0 ; i< m->nrow ; i++){
+        for (j=0 ; j < m->ncol ;j++){
+            m->mat[i][j] = array[l];
+            l++;
+        }
+    }
 }
 
 void matrix_display(matrix_t *m)
@@ -41,9 +57,10 @@ matrix_t *matrix_random_init(int32 nrow, int32 ncol, float32 range)
         }
     }
 
+    return m;
 }
 
-void add_to_a(matrix_t *a, matrix_t *b)
+void matrix_add_to_a(matrix_t *a, matrix_t *b)
 {
     assert (a->ncol == b->ncol && a->nrow == b->nrow);
     int32 i, j;
@@ -56,7 +73,8 @@ void add_to_a(matrix_t *a, matrix_t *b)
     
 }
 
-void scale_a(matrix_t *a, float scale)
+
+void matrix_scale_a(matrix_t *a, float scale)
 {
     int32 i,j;
     for (i=0; i<a->nrow;i++){
@@ -66,7 +84,33 @@ void scale_a(matrix_t *a, float scale)
     }
 }
 
-void add (matrix_t *out_c, matrix_t *a, matrix_t *b)
+void matrix_copy_to_a_from_b (matrix_t *a, matrix_t *b)
+{
+    assert (a->ncol == b->ncol && a->nrow == b->nrow);
+    int32 i,j;
+    for (i=0; i<a->nrow;i++){
+        for (j=0 ; j< a->ncol;j++){
+            a->mat[i][j] = b->mat[i][j];
+        }
+    }
+}
+
+int32 matrix_equal(matrix_t *a, matrix_t *b)
+{
+    if (a->ncol != b->ncol || a->nrow != b->nrow)
+        return 0;
+
+    int32 i,j;
+    for (i=0; i<a->nrow;i++){
+        for (j=0 ; j< a->ncol;j++){
+            if (a->mat[i][j] != b->mat[i][j])
+                return 0;
+        }
+    }
+    return 1;
+}
+
+void matrix_add (matrix_t *out_c, matrix_t *a, matrix_t *b)
 {
     assert (a->ncol == b->ncol && a->nrow == b->nrow);
 
@@ -81,7 +125,9 @@ void add (matrix_t *out_c, matrix_t *a, matrix_t *b)
     }
 }
 
-void multiply (matrix_t *out_c, matrix_t *a, matrix_t *b)
+
+
+void matrix_multiply (matrix_t *out_c, matrix_t *a, matrix_t *b)
 {
     assert (a->ncol == b->nrow);
     int32 new_row = a->nrow;
