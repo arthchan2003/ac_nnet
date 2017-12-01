@@ -69,21 +69,27 @@ int main(int argc, char *argv[])
     float32 vals_a[4] = {1,2,3,4};
     float32 vals_b[4] = {1,0,0,1};
     float32 vals_d[4] = {1,1,1,1};
+    float32 vals_e[4] = {1,2,3,4};
 
     //Simple multiplications. 
-    matrix_t *a, *b, *c, *d;
+    matrix_t *a, *b, *c, *d, *e;
     a = matrix_init_with_array(2,2,vals_a);
     b = matrix_init_with_array(2,2,vals_b);
     c = matrix_init(2,2);
     d = matrix_init_with_array(2,2,vals_d);
+    e = matrix_init_with_array(2,2,vals_e);
+
 
     matrix_display(a);
     matrix_display(b);
     matrix_display(c);
     matrix_display(d);
+    matrix_display(e);
 
     matrix_multiply (c, a, b);
     matrix_display(c);
+
+    assert (matrix_verify(c,e));
 
     matrix_multiply (c, a, d);
     matrix_display(c);
@@ -91,11 +97,25 @@ int main(int argc, char *argv[])
     matrix_multiply (c, d, a);
     matrix_display(c);
 
+
+    matrix_square_transpose(a);
+    matrix_display(a);
+
     matrix_free(a) ; a = NULL;
     matrix_free(b) ; b = NULL;
     matrix_free(c) ; c = NULL;
     matrix_free(d) ; d = NULL;
     
-    
-    
+
+    float32 vals_f[9] = {1,2,3,4,5,6,7,8,9};    
+    matrix_t *f;
+
+    f = matrix_init_with_array(3,3,vals_f);
+    matrix_display(f);
+
+    matrix_square_transpose(f);
+    matrix_display(f);
+
+    matrix_free(f) ; f = NULL;
+    return 0;
 }

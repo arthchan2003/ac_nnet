@@ -29,11 +29,15 @@ void matrix_multiply (matrix_t *out_c, matrix_t *a, matrix_t *b);
 
 int32 matrix_equal(matrix_t *a, matrix_t *b);
 
+int32 matrix_verify(matrix_t *a, matrix_t *b);
+
 void maatrix_add (matrix_t *out_c, matrix_t *a, matrix_t *b);
 
 void matrix_free(matrix_t *m);
 
 int32 matrix_equal(matrix_t *a, matrix_t *b);
+
+void matrix_square_transpose(matrix_t *a);
 
 
 //matrix_t *matrix_random_init(int32 nrow, int32 ncol, float32 range);

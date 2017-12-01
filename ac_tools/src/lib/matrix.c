@@ -110,6 +110,10 @@ int32 matrix_equal(matrix_t *a, matrix_t *b)
     return 1;
 }
 
+int32 matrix_verify(matrix_t *a, matrix_t *b){
+    return matrix_equal(a,b);
+}
+
 void matrix_add (matrix_t *out_c, matrix_t *a, matrix_t *b)
 {
     assert (a->ncol == b->ncol && a->nrow == b->nrow);
@@ -125,6 +129,20 @@ void matrix_add (matrix_t *out_c, matrix_t *a, matrix_t *b)
     }
 }
 
+void matrix_square_transpose(matrix_t *a)
+{
+    assert (a->nrow == a->ncol);
+
+    int32 i,j;
+    float32 tmp;
+    for (i=0; i< a->nrow ; i++){
+        for (j=i+1; j < a->ncol ; j++){
+            tmp =  a->mat[j][i];
+            a->mat[j][i] = a->mat[i][j];
+            a->mat[i][j] = tmp;
+        }
+    }
+}
 
 
 void matrix_multiply (matrix_t *out_c, matrix_t *a, matrix_t *b)
