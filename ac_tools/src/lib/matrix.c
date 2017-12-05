@@ -60,6 +60,28 @@ void matrix_permute_rows (matrix_t *m, int row1, int row2)
     
 }
 
+// Implement E_{row1}{row2}
+void matrix_eliminate (matrix_t *m, int row1, int row2)
+{
+    assert (row1 >=0 && row1 < m->nrow);
+    assert (row2 >=0 && row2 < m->nrow);
+    int j;
+
+    float factor=m->mat[row2][row1]/ m->mat[row1][row1];
+
+    for (j=0 ; j < m->ncol ;  j++){
+
+        m->mat[row2][j] -= factor * m->mat[row1][j];
+        
+//        tmp = m->mat[row1][j]; 
+//        m->mat[row1][j] = m->mat[row2][j];
+//        m->mat[row2][j] = tmp;
+
+    }
+
+
+}
+
 //range is the [0, range]
 matrix_t *matrix_random_init(int32 nrow, int32 ncol, float32 range)
 {

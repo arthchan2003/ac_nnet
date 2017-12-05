@@ -126,5 +126,18 @@ int main(int argc, char *argv[])
     matrix_display(f);
 
     matrix_free(f) ; f = NULL;
+
+    float32 vals_g[9] = {1,2,3,4,5,6,7,8,18};    
+    matrix_t *g;
+
+    g = matrix_init_with_array(3,3,vals_g);
+    matrix_eliminate(g,0,1);
+    matrix_display(g);
+    matrix_eliminate(g,0,2);
+    matrix_display(g);
+    matrix_eliminate(g,1,2);
+    matrix_display(g);
+
+    matrix_free(g) ; g = NULL;
     return 0;
 }
