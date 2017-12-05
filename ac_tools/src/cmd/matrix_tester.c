@@ -116,6 +116,15 @@ int main(int argc, char *argv[])
     matrix_square_transpose(f);
     matrix_display(f);
 
+    matrix_square_transpose(f);
+    matrix_display(f);
+
+    matrix_permute_rows(f, 0, 1);
+    matrix_display(f);
+
+    matrix_permute_rows(f, 0, 1);
+    matrix_display(f);
+
     matrix_free(f) ; f = NULL;
     return 0;
 }

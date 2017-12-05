@@ -29,6 +29,8 @@ matrix_t *matrix_init_with_array (int32 nrow, int32 ncol, float32 array[])
     }
 }
 
+
+
 void matrix_display(matrix_t *m)
 {
     int i,j;
@@ -39,6 +41,23 @@ void matrix_display(matrix_t *m)
         printf("\n");
     }
     printf("\n");
+}
+
+void matrix_permute_rows (matrix_t *m, int row1, int row2)
+{
+    float tmp;
+    assert (row1 >=0 && row1 < m->nrow);
+    assert (row2 >=0 && row2 < m->nrow);
+    int j;
+
+    for (j=0 ; j < m->ncol ;  j++){
+        
+        tmp = m->mat[row1][j]; 
+        m->mat[row1][j] = m->mat[row2][j];
+        m->mat[row2][j] = tmp;
+
+    }
+    
 }
 
 //range is the [0, range]

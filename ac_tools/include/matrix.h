@@ -39,6 +39,8 @@ int32 matrix_equal(matrix_t *a, matrix_t *b);
 
 void matrix_square_transpose(matrix_t *a);
 
+void matrix_permute_rows (matrix_t *m, int row1, int row2);
+
 
 //matrix_t *matrix_random_init(int32 nrow, int32 ncol, float32 range);
 
